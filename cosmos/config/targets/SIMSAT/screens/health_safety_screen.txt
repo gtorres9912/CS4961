@@ -1,0 +1,115 @@
+###############################################################################
+# SimSat Health and Safety Application Screen
+#
+# License:
+#   Written by David McComas, licensed under the copyleft GNU General
+#   Public License (GPL).
+# 
+###############################################################################
+<% 
+   require 'osk_global'
+   require 'simsat_screen'
+%>
+
+SCREEN AUTO AUTO 0.5
+GLOBAL_SETTING BUTTON BACKCOLOR 221 221 221
+
+TITLE "SimSat Health and Safety Applications"
+   SETTING BACKCOLOR 162 181 205
+   SETTING TEXTCOLOR black
+
+VERTICAL   # With 2 rows
+   HORIZONTAL # Row 1
+
+      CANVAS 570 375
+         CANVASIMAGE "SimSat-Bubble-Health_Safety.png" 20 0
+      END
+      SETTING BACKCOLOR 255 255 255  
+  
+      VERTICALBOX # Apps
+  
+         LABEL "    "
+         LABEL "    "
+
+         VERTICALBOX "Checksum (CS)"
+         MATRIXBYCOLUMNS 2 5 2
+         
+            BUTTON 'Send Cmd' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "CS_CMD")'
+            NAMED_WIDGET cs_cmd COMBOBOX NOOP RESET_CTRS START_ONESHOT CANCEL_ONESHOT ENA_ALL DIS_ALL ENA_CFE_CORE DIS_CFE_CORE REPORT_CFE_CORE_BASELINE COMPUTE_CFE_CORE_BASELINE ENA_OS DIS_OS REPORT_OS_BASELINE COMPUTE_OS_BASELINE ENA_EEPROM_TBL DIS_EEPROM_TBL REPORT_EEPROM_BASELINE COMPUTE_EEPROM_BASELINE ENA_EEPROM_TBL_ENTRY DIS_EEPROM_TBL_ENTRY GET_EEPROM_TBL_ENTRY_ID ENA_MEM_TBL DIS_MEM_TBL REPORT_MEM_BASELINE COMPUTE_MEM_BASELINE ENA_MEM_TBL_ENTRY DIS_MEM_TBL_ENTRY GET_MEM_TBL_ENTRY_ID ENA_TABLES_TBL DIS_TABLES_TBL REPORT_TBL_BASELINE COMPUTE_TBL_BASELINE ENA_TABLES_TBL_ENTRY DIS_TABLES_TBL_ENTRY ENA_APP_TBL DIS_APP_TBL REPORT_APP_BASELINE COMPUTE_APP_BASELINE ENA_APP_TBL_ENTRY DIS_APP_TBL_ENTRY
+
+            BUTTON 'Display Tlm' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "CS_TLM")'
+            NAMED_WIDGET cs_tlm COMBOBOX HOUSEKEEPING
+
+            BUTTON 'Display Table' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "CS_TBL")'
+            NAMED_WIDGET cs_tbl COMBOBOX "App" "EEPROM" "Memory" "Tables" "App Results" "EEPROM Results" "Memory Results" "Tables Results"
+
+            BUTTON "User's Guide" 'simsat_scr_cmd(self, "HEALTH_SAFETY", "CS_DOC")'
+            SETTING BACKCOLOR 255 255 255
+
+         END # Matrix
+         END # VerticalBox
+  
+         LABEL "    "
+      
+         VERTICALBOX "Health&Safety (HS)"
+         MATRIXBYCOLUMNS 2 5 2
+
+            BUTTON 'Send Cmd' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "HS_CMD")'
+            NAMED_WIDGET hs_cmd COMBOBOX NOOP RESET_CTRS ENA_APP_MON DIS_APP_MON ENA_EVENT_MON DIS_EVENT_MON ENA_ALIVENESS DIS_ALIVENESS CLR_CPU_RESET_CNT SET_MAX_CPU_RESETS ENA_CPU_HOG DIS_CPU_HOG
+
+            BUTTON 'Display Tlm' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "HS_TLM")'
+            NAMED_WIDGET hs_tlm COMBOBOX HOUSEKEEPING
+
+            BUTTON 'Display Table' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "HS_TBL")'
+            NAMED_WIDGET hs_tbl COMBOBOX "App Monitor" "Event Monitor" "Msg Action" "Exec Counter"
+
+            BUTTON "User's Guide" 'simsat_scr_cmd(self, "HEALTH_SAFETY", "HS_DOC")'
+            SETTING BACKCOLOR 255 255 255
+
+         END # Matrix
+         END # HS VerticalBox
+      
+      END # App VerticalBox
+      SETTING BACKCOLOR 162 181 205
+
+   END # Row 1 Horizontal
+    
+   HORIZONTAL # Row 2
+
+      VERTICALBOX "Functional Screens"
+      MATRIXBYCOLUMNS 2 5 2
+
+         BUTTON 'CS Mgmt' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "FUNC_CS_MGMT")'
+         BUTTON 'HS Mgmt' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "FUNC_HS_MGMT")'
+
+      END # Matrix
+      END # Function VerticalBox
+      SETTING BACKCOLOR 162 181 205
+
+      VERTICALBOX "Learning Resources"
+      MATRIXBYCOLUMNS 3 5 2
+
+         BUTTON 'Run Demo' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "DEMO")'
+         NAMED_WIDGET demo COMBOBOX "CS-HS Demo Script"
+         LABEL "    "
+
+         BUTTON 'Run Tutorial' 'simsat_scr_cmd(self, "HEALTH_SAFETY", "TUTORIAL")'
+         NAMED_WIDGET tutorial COMBOBOX "HS App Group Intro Slides" "HS App Group Intro Video"
+         LABEL "    "
+
+      END # Matrix
+      END # Learn VerticalBox
+      SETTING BACKCOLOR 162 181 205  
+
+      VERTICALBOX # Spacer
+      MATRIXBYCOLUMNS 2 5 2
+         LABEL "    "
+         LABEL "    "
+         LABEL "    "
+         LABEL "    "
+      END # Matrix
+      END # Spacer VerticalBox
+      SETTING BACKCOLOR 162 181 205
+ 
+   END # Row 2 Horizontal
+END # Vertical with 2 rows
